@@ -45,21 +45,21 @@ public class UserService {
         AppointmentEntity appointmentEntity = new AppointmentEntity();
         appointmentEntity.setFname(userEntity.getFname());
 
+        logger.info("Creating appointment for user");
+        appointmentRepository.save(appointmentEntity);
+        logger.info("Created appointment successfully");
+
         List<AppointmentEntity> appointmentEntities = appointmentRepository.findAllByfname(userEntity.getFname());
 
         if (appointmentEntities.size() > 5) {
             throw new IllegalArgumentException();
         }
 
-        logger.info("Creating appointment for user");
-        appointmentRepository.save(appointmentEntity);
-        logger.info("Created appointment successfully");
-
     }
 
     public void triggerAsyncTransactions() {
         for (int i = 0; i < 5; i++) {
-            asyncUserService.changeDB();
+            asyncUserService.changeAppointmentsToCurrentThreadId();
             logger.info("triggered changeDB for " + i);
         }
     }

@@ -27,7 +27,7 @@ public class AsyncUserService {
 
     @Async
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void changeDB() {
+    public void changeAppointmentsToCurrentThreadId() {
         List<UserEntity> allRead = IterableUtils.toList(userRepository.findAll());
 
         long threadId = Thread.currentThread().getId();
