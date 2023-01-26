@@ -14,8 +14,4 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<UserEntity> findAll();
-//
-//    @Override
-//    @Lock(LockModeType.PESSIMISTIC_READ)
-//    <S extends UserEntity> List<S> saveAll(Iterable<S> entities);
 }
